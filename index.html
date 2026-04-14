@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trangketoan - Dịch Vụ Kế Toán & Thành Lập Công Ty Trọn Gói</title>
+    
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom Tailwind Config for Dark Mode & Accents -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        slate: {
+                            50: '#F8FAFC',
+                            400: '#94A3B8',
+                            800: '#1E293B',
+                            900: '#0F172A',
+                        },
+                        brand: {
+                            accent: '#FA5514', // Orange Red
+                            accentHover: '#E04B10',
+                            accentLight: 'rgba(250, 85, 20, 0.1)',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0F172A;
+            color: #F8FAFC;
+        }
+        
+        /* Glassmorphism utility */
+        .glass {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        /* Custom hover border glow for service cards */
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            border-color: #FA5514;
+            box-shadow: 0 0 15px rgba(250, 85, 20, 0.15);
+            transform: translateY(-5px);
+        }
+        
+        /* Gradient text */
+        .text-gradient {
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-image: linear-gradient(to right, #ffffff, #94A3B8);
+        }
+        
+        .text-gradient-brand {
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-image: linear-gradient(to right, #FA5514, #ff8a5c);
+        }
+
+        /* Hide scrollbar but keep functionality */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-accent selection:text-white">
+
+    <!-- HEADER / NAVBAR (Floating) -->
+    <header class="fixed top-0 left-0 right-0 z-50 px-4 py-4 md:px-8 lg:px-12 transition-all duration-300" id="navbar">
+        <div class="glass max-w-7xl mx-auto rounded-2xl px-6 py-3 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-2 group cursor-pointer">
+                <div class="w-10 h-10 bg-brand-accent rounded-xl flex items-center justify-center transform group-hover:rotate-12 transition-transform duration-300">
+                    <i class="fa-solid fa-calculator text-white text-xl"></i>
+                </div>
+                <span class="font-heading font-bold text-2xl tracking-tight text-white">Trang<span class="text-brand-accent">ketoan</span></span>
+            </a>
+
+            <!-- Desktop Menu -->
+            <nav class="hidden lg:flex items-center gap-8">
+                <a href="#thanh-lap" class="text-slate-400 hover:text-white font-medium transition-colors text-sm">Thành lập DN</a>
+                <a href="#ke-toan" class="text-slate-400 hover:text-white font-medium transition-colors text-sm">Kế toán - Thuế</a>
+                <a href="#thay-doi" class="text-slate-400 hover:text-white font-medium transition-colors text-sm">Thay đổi GPKD</a>
+                <a href="#dao-tao" class="text-slate-400 hover:text-white font-medium transition-colors text-sm">Đào tạo</a>
+            </nav>
+
+            <!-- CTA / Contact -->
+            <div class="hidden md:flex items-center gap-4">
+                <div class="text-right mr-2">
+                    <p class="text-xs text-slate-400">Hotline tư vấn (24/7)</p>
+                    <a href="tel:0777868678" class="font-heading font-bold text-white hover:text-brand-accent transition-colors">0777 868 678</a>
+                </div>
+                <a href="https://zalo.me/0777868678" target="_blank" class="bg-brand-accent hover:bg-brand-accentHover text-white px-5 py-2.5 rounded-xl font-medium transition-all duration-300 flex items-center gap-2 shadow-[0_0_15px_rgba(250,85,20,0.3)] hover:shadow-[0_0_20px_rgba(250,85,20,0.5)] transform hover:-translate-y-0.5 cursor-pointer">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg" alt="Zalo" class="w-5 h-5 filter brightness-0 invert">
+                    <span>Chat Zalo</span>
+                </a>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button class="lg:hidden text-white p-2" id="mobile-menu-btn" aria-label="Toggle menu">
+                <i class="fa-solid fa-bars text-2xl"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="relative pt-40 pb-20 lg:pt-52 lg:pb-32 overflow-hidden flex items-center min-h-[90vh]">
+        <!-- Background Elements -->
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-brand-accent opacity-[0.05] blur-[120px] rounded-full pointer-events-none"></div>
+        <div class="absolute -top-40 -right-40 w-[600px] h-[600px] bg-blue-500 opacity-[0.03] blur-[100px] rounded-full pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-6 md:px-8 lg:px-12 relative z-10 grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+            
+            <!-- Hero Content -->
+            <div class="max-w-3xl">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border-brand-accent/30 text-brand-accent text-sm font-medium mb-8">
+                    <span class="relative flex h-3 w-3">
+                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-accent opacity-75"></span>
+                      <span class="relative inline-flex rounded-full h-3 w-3 bg-brand-accent"></span>
+                    </span>
+                    Giải Pháp Doanh Nghiệp Toàn Diện
+                </div>
+                
+                <h1 class="font-heading text-4xl md:text-5xl lg:text-6xl font-extrabold leading-[1.15] mb-6">
+                    Pháp Lý Nhanh Chóng <br>
+                    <span class="text-gradient-brand">Kế Toán Minh Bạch</span><br>
+                    Trọn Gói
+                </h1>
+                
+                <p class="text-slate-400 text-lg md:text-xl mb-10 max-w-2xl leading-relaxed">
+                    Đồng hành cùng sự phát triển của doanh nghiệp bạn. Cam kết bảo mật, chuẩn xác theo quy định pháp luật và tuyệt đối không phát sinh chi phí ẩn.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-4 mb-12">
+                    <a href="tel:0777868678" class="bg-brand-accent hover:bg-brand-accentHover text-white px-8 py-4 rounded-xl font-bold transition-all duration-300 flex items-center justify-center gap-3 shadow-[0_0_20px_rgba(250,85,20,0.4)] hover:shadow-[0_0_30px_rgba(250,85,20,0.6)] transform hover:-translate-y-1 text-lg cursor-pointer">
+                        <i class="fa-solid fa-phone-volume"></i>
+                        Nhận tư vấn miễn phí
+                    </a>
+                    <a href="#bang-gia" class="glass hover:bg-slate-800 text-white border border-slate-700 hover:border-brand-accent px-8 py-4 rounded-xl font-medium transition-all duration-300 flex items-center justify-center gap-3 text-lg cursor-pointer">
+                        Xem bảng giá chi tiết
+                        <i class="fa-solid fa-arrow-down"></i>
+                    </a>
+                </div>
+
+                <!-- Trust Indicators -->
+                <div class="flex flex-wrap items-center gap-y-4 gap-x-8 text-sm font-medium text-slate-300">
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-brand-accent">
+                            <i class="fa-solid fa-check"></i>
+                        </div>
+                        Hỗ trợ 5000+ KH
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-brand-accent">
+                            <i class="fa-solid fa-user-tie"></i>
+                        </div>
+                        >10 năm kinh nghiệm
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-brand-accent">
+                            <i class="fa-solid fa-bolt"></i>
+                        </div>
+                        Hoàn thành 1-3 ngày
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hero Visual (Decorative UI Elements representing dashboards/documents) -->
+            <div class="relative lg:h-[600px] hidden lg:block perspective-1000">
+                <!-- Main Dashboard Card -->
+                <div class="glass absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[350px] rounded-2xl border border-slate-700 p-6 shadow-2xl z-20 animate-float transform rotate-y-[-10deg] rotate-x-[5deg]">
+                    <div class="flex items-center justify-between border-b border-slate-700 pb-4 mb-6">
+                        <div class="flex items-center gap-3">
+                            <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                        </div>
+                        <div class="text-xs font-mono text-slate-400">Báo cáo tình hình nộp thuế</div>
+                    </div>
+                    
+                    <div class="flex gap-6 mb-6">
+                        <div class="flex-1 bg-slate-800/50 rounded-lg p-4 border border-slate-700/50">
+                            <div class="text-xs text-slate-400 mb-1">Doanh thu</div>
+                            <div class="text-xl font-bold text-white">4.2M ₫</div>
+                            <div class="text-xs text-green-400 mt-2 flex items-center gap-1"><i class="fa-solid fa-arrow-trend-up"></i> +12.5%</div>
+                        </div>
+                        <div class="flex-1 bg-slate-800/50 rounded-lg p-4 border border-slate-700/50">
+                            <div class="text-xs text-slate-400 mb-1">Thuế đã nộp</div>
+                            <div class="text-xl font-bold text-brand-accent">850K ₫</div>
+                            <div class="text-xs text-slate-400 mt-2">Kỳ Q3/2026</div>
+                        </div>
+                    </div>
+
+                    <!-- Fake Chart -->
+                    <div class="h-24 flex items-end gap-2 px-2">
+                        <div class="w-full bg-brand-accent/20 hover:bg-brand-accent/40 transition-colors rounded-t-sm" style="height: 40%"></div>
+                        <div class="w-full bg-brand-accent/30 hover:bg-brand-accent/50 transition-colors rounded-t-sm" style="height: 60%"></div>
+                        <div class="w-full bg-brand-accent/40 hover:bg-brand-accent/60 transition-colors rounded-t-sm" style="height: 35%"></div>
+                        <div class="w-full bg-brand-accent/60 hover:bg-brand-accent/80 transition-colors rounded-t-sm" style="height: 80%"></div>
+                        <div class="w-full bg-brand-accent rounded-t-sm shadow-[0_0_10px_rgba(250,85,20,0.5)]" style="height: 100%"></div>
+                    </div>
+                </div>
+
+                <!-- Floating Document 1 -->
+                <div class="absolute top-20 right-0 glass w-[250px] rounded-xl p-4 border border-slate-700 shadow-xl z-10 animate-float" style="animation-delay: 1s;">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-8 h-8 rounded-lg bg-green-500/20 text-green-400 flex items-center justify-center">
+                            <i class="fa-solid fa-file-signature"></i>
+                        </div>
+                        <div>
+                            <div class="text-sm font-bold text-white">GPKD Đã Cấp</div>
+                            <div class="text-xs text-slate-400">Hoàn thành trong 2 ngày</div>
+                        </div>
+                    </div>
+                    <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+                        <div class="w-full h-full bg-green-500 rounded-full"></div>
+                    </div>
+                </div>
+
+                <!-- Floating Document 2 -->
+                <div class="absolute bottom-10 left-[-20px] glass w-[220px] rounded-xl p-4 border border-slate-700 shadow-xl z-30 animate-float" style="animation-delay: 2s;">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-brand-accent/20 text-brand-accent flex items-center justify-center">
+                            <i class="fa-solid fa-check-double text-lg"></i>
+                        </div>
+                        <div>
+                            <div class="text-sm font-bold text-white">Quyết Toán Thuế</div>
+                            <div class="text-xs text-brand-accent mt-0.5">Thành công!</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES SECTION (GRID LAYOUT) -->
+    <section id="bang-gia" class="py-20 relative border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-6 md:px-8 lg:px-12 relative z-10">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="font-heading text-3xl md:text-4xl font-bold mb-4">Dịch Vụ Nổi Bật <span class="text-brand-accent">& Bảng Giá</span></h2>
+                <p class="text-slate-400 text-lg">Hệ thống dịch vụ trọn gói, minh bạch chi phí. Không phát sinh bất kỳ khoản nào ngoài hợp đồng.</p>
+            </div>
+
+            <!-- Group 1: Thành lập Doanh Nghiệp -->
+            <div class="mb-20" id="thanh-lap">
+                <div class="flex items-center gap-4 mb-8">
+                    <div class="w-12 h-12 rounded-xl bg-slate-800 text-brand-accent flex items-center justify-center text-xl">
+                        <i class="fa-solid fa-building"></i>
+                    </div>
+                    <h3 class="font-heading text-2xl font-bold text-white">Thành Lập Doanh Nghiệp</h3>
+                    <div class="flex-1 h-px bg-slate-800 ml-4"></div>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Service Card 1 -->
+                    <div class="glass p-6 rounded-2xl border border-slate-700 card-hover flex flex-col group relative overflow-hidden cursor-pointer">
+                        <div class="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity text-brand-accent">
+                            <i class="fa-solid fa-arrow-right -rotate-45 text-xl"></i>
+                        </div>
+                        <h4 class="font-bold text-lg text-white mb-2 group-hover:text-brand-accent transition-colors">Công ty TNHH</h4>
+                        <p class="text-sm text-slate-400 mb-6 flex-1">(1 thành viên hoặc >= 2 thành viên)</p>
+                        
+                        <div class="mt-auto">
+                            <div class="text-xs text-slate-500 mb-1">Trọn gói từ</div>
+                            <div class="flex items-baseline gap-1">
+                                <span class="font-heading text-3xl font-extrabold text-white">250.000</span>
+                                <span class="text-brand-accent text-sm font-bold">đ</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Service Card 2 -->
+                    <div class="glass p-6 rounded-2xl border border-slate-700 card-hover flex flex-col group relative overflow-hidden cursor-pointer">
+                        <div class="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity text-brand-accent">
+                            <i class="fa-solid fa-arrow-right -rotate-45 text-xl"></i>
+                        </div>
+                        <h4 class="font-bold text-lg text-white mb-2 group-hover:text-brand-accent transition-colors">Công ty Cổ Phần</h4>
+                        <p class="text-sm text-slate-400 mb-6 flex-1">Tư vấn vốn điều lệ, cổ đông</p>
+                        
+                        <div class="mt-auto">
+                            <div class="text-xs text-slate-500 mb-1">Trọn gói từ</div>
+                            <div class="flex items-baseline gap-1">
+                                <span class="font-heading text-3xl font-extrabold text-white">250.000</span>
+                                <span class="text-brand-accent text-sm font-bold">đ</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Service Card 3 -->
+                    <div class="glass p-6 rounded-2xl border border-slate-700 card-hover flex flex-col group relative overflow-hidden cursor-pointer">
+                        <div class="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity text-brand-accent">
+                            <i class="fa-solid fa-arrow-right -rotate-45 text-xl"></i>
+                        </div>
+                        <h4 class="font-bold text-lg text-white mb-2 group-hover:text-brand-accent transition-colors">Hộ Kinh Doanh</h4>
+                        <p class="text-sm text-slate-400 mb-6 flex-1">Đăng ký nhanh chóng cho hộ gia đình</p>
+                        
+                        <div class="mt-auto">
+                            <div class="text-xs text-slate-500 mb-1">Trọn gói từ</div>
+                            <div class="flex items-baseline gap-1">
+                                <span class="font-heading text-3xl font-extrabold text-white">1.500.000</span>
+                                <span class="text-brand-accent text-sm font-bold">đ</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Service Card 4 -->
+                    <div class="glass p-6 rounded-2xl border border-slate-700 card-hover flex flex-col group relative overflow-hidden cursor-pointer">
+                        <div class="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity text-brand-accent">
+                            <i class="fa-solid fa-arrow-right -rotate-45 text-xl"></i>
+                        </div>
+                        <h4 class="font-bold text-lg text-white mb-2 group-hover:text-brand-accent transition-colors">Chi Nhánh Cty</h4>
+                        <p class="text-sm text-slate-400 mb-6 flex-1">Mở rộng quy mô, lập địa điểm kinh doanh</p>
+                        
+                        <div class="mt-auto">
+                            <div class="text-xs text-slate-500 mb-1">Liên hệ báo giá</div>
+                            <div class="flex items-baseline gap-1">
+                                <span class="font-heading text-2xl font-extrabold text-brand-accent">Tư vấn ngay</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Accordion Bảng Giá Chi Tiết -->
+                <div class="mt-8 text-center">
+                    <button onclick="togglePricing('pricing-thanh-lap')" class="inline-flex items-center gap-2 text-brand-accent hover:text-brand-accentHover font-medium transition-colors cursor-pointer">
+                        <span>Xem bảng giá chi tiết tất cả dịch vụ</span>
+                        <i class="fa-solid fa-chevron-down transition-transform duration-300" id="icon-thanh-lap"></i>
+                    </button>
+                </div>
+                <div id="pricing-thanh-lap" class="hidden mt-6 bg-slate-800/40 rounded-2xl border border-slate-700 overflow-x-auto">
+                    <table class="w-full text-left border-collapse min-w-[600px]">
+                        <thead>
+                            <tr class="bg-slate-800">
+                                <th class="py-4 px-6 text-white font-bold border-b border-slate-700">Dịch vụ thành lập</th>
+                                <th class="py-4 px-6 text-white font-bold border-b border-slate-700 text-right">Phí dịch vụ</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-700/50">
+                            <tr class="hover:bg-slate-700/30 transition-colors">
+                                <td class="py-4 px-6 text-slate-300">Thành lập công ty TNHH (1 thành viên hoặc từ 2 thành viên)</td>
+                                <td class="py-4 px-6 text-white font-bold text-right">250.000đ</td>
+                            </tr>
+                            <tr class="hover:bg-slate-700/30 transition-colors">
+                                <td class="py-4 px-6 text-slate-300">Thành lập công ty Cổ phần / Hợp danh</td>
+                                <td class="py-4 px-6 text-white font-bold text-right">250.000đ</td>
+                            </tr>
+                            <tr class="hover:bg-slate-700/30 transition-colors">
+                                <td class="py-4 px-6 text-slate-300">Đăng ký kinh doanh Hộ cá thể</td>
+                                <td class="py-4 px-6 text-white font-bold text-right">1.500.000đ</td>
+                            </tr>
+                            <tr class="hover:bg-slate-700/30 transition-colors">
+                                <td class="py-4 px-6 text-slate-300">Thành lập Chi nhánh / Địa điểm kinh doanh</td>
+                                <td class="py-4 px-6 text-white font-bold text-right">500.000đ</td>
+                            </tr>
+                            <tr class="hover:bg-slate-700/30 transition-colors">
+                                <td class="py-4 px-6 text-slate-300 text-sm italic text-slate-400" colspan="2">* Phí nhà nước (Lệ phí ủy quyền, khắc dấu, đăng bố cáo...): Vui lòng liên hệ để được báo giá trọn gói không phát sinh theo từng thời điểm.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Group 2: Dịch Vụ Kế Toán -->
+            <div class="mb-20" id="ke-toan">
+                <div class="flex items-center gap-4 mb-8">
+                    <div class="w-12 h-12 rounded-xl bg-slate-800 text-brand-accent flex items-center justify-center text-xl">
+                        <i class="fa-solid fa-file-invoice-dollar"></i>
+                    </div>
+                    <h3 class="font-heading text-2xl font-bold text-white">Kế Toán & Báo Cáo Thuế</h3>
+                    <div class="flex-1 h-px bg-slate-800 ml-4"></div>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Service Card -->
+                    <div class="glass p-6 rounded-2xl border border-slate-700 card-hover flex flex-col group relative overflow-hidden cursor-pointer">
+                        <div class="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity text-brand-accent">
+                            <i class="fa-solid fa-arrow-right -rotate-45 text-xl"></i>
+                        </div>
+                        <div class="w-10 h-10 rounded-lg bg-slate-800 flex items-center justify-center text-brand-accent mb-4">
+                            <i class="fa-solid fa-box-open"></i>
+                        </div>
+                        <h4 class="font-bold text-xl text-white mb-2 group-hover:text-brand-accent transition-colors">Kế Toán Trọn Gói</h4>
+                        <p class="text-sm text-slate-400 mb-6 flex-1">Chịu hoàn toàn trách nhiệm báo cáo, giải trình cơ quan thuế.</p>
+                        
+                        <div class="mt-auto pt-4 border-t border-slate-800 flex justify-between items-end">
+                            <div>
+                                <div class="text-xs text-slate-500 mb-1">Chỉ từ</div>
+                                <div class="flex items-baseline gap-1">
+                                    <span class="font-heading text-3xl font-extrabold text-white">500.000</span>
+                                    <span class="text-brand-accent text-sm font-bold">đ/tháng</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Service Card -->
+                    <div class="glass p-6 rounded-2xl border border-slate-700 card-hover flex flex-col group relative overflow-hidden cursor-pointer">
+                        <div class="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity text-brand-accent">
+                            <i class="fa-solid fa-arrow-right -rotate-45 text-xl"></i>
+                        </div>
+                        <div class="w-10 h-10 rounded-lg bg-slate-800 flex items-center justify-center text-brand-accent mb-4">
+                            <i class="fa-solid fa-book"></i>
+                        </div>
+                        <h4 class="font-bold text-xl text-white mb-2 group-hover:text-brand-accent transition-colors">Sổ Sách & BCTC</h4>
+                        <p class="text-sm text-slate-400 mb-6 flex-1">Hoàn thiện sổ sách, lập Báo cáo tài chính, Quyết toán thuế cuối năm.</p>
+                        
+                        <div class="mt-auto pt-4 border-t border-slate-800 flex justify-between items-end">
+                            <div>
+                                <div class="text-xs text-slate-500 mb-1">Liên hệ</div>
+                                <div class="flex items-baseline gap-1">
+                                    <span class="font-heading text-xl font-extrabold text-brand-accent">Báo giá theo HS</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Service Card -->
+                    <div class="glass p-6 rounded-2xl border border-slate-700 card-hover flex flex-col group relative overflow-hidden cursor-pointer">
+                        <div class="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity text-brand-accent">
+                            <i class="fa-solid fa-arrow-right -rotate-45 text-xl"></i>
+                        </div>
+                        <div class="w-10 h-10 rounded-lg bg-slate-800 flex items-center justify-center text-brand-accent mb-4">
+                            <i class="fa-solid fa-money-bill-transfer"></i>
+                        </div>
+                        <h4 class="font-bold text-xl text-white mb-2 group-hover:text-brand-accent transition-colors">Khai & Hoàn Thuế</h4>
+                        <p class="text-sm text-slate-400 mb-6 flex-1">Khai thuế ban đầu, hoàn thuế GTGT, TNCN nhanh chóng, đúng luật.</p>
+                        
+                        <div class="mt-auto pt-4 border-t border-slate-800 flex justify-between items-end">
+                            <div>
+                                <div class="text-xs text-slate-500 mb-1">Liên hệ</div>
+                                <div class="flex items-baseline gap-1">
+                                    <span class="font-heading text-xl font-extrabold text-brand-accent">Tư vấn trực tiếp</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Accordion Bảng Giá Chi Tiết -->
+                <div class="mt-8 text-center">
+                    <button onclick="togglePricing('pricing-ke-toan')" class="inline-flex items-center gap-2 text-brand-accent hover:text-brand-accentHover font-medium transition-colors cursor-pointer">
+                        <span>Xem bảng giá chi tiết tất cả dịch vụ</span>
+                        <i class="fa-solid fa-chevron-down transition-transform duration-300" id="icon-ke-toan"></i>
+                    </button>
+                </div>
+                <div id="pricing-ke-toan" class="hidden mt-6 bg-slate-800/40 rounded-2xl border border-slate-700 overflow-x-auto">
+                    <table class="w-full text-left border-collapse min-w-[600px]">
+                        <thead>
+                            <tr class="bg-slate-800">
+                                <th class="py-4 px-6 text-white font-bold border-b border-slate-700">Dịch vụ Kế toán & Báo cáo thuế</th>
+                                <th class="py-4 px-6 text-white font-bold border-b border-slate-700 text-right">Phí dịch vụ</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-700/50">
+                            <tr class="hover:bg-slate-700/30 transition-colors">
+                                <td class="py-4 px-6 text-slate-300">Dịch vụ kế toán trọn gói (báo cáo thuế)</td>
+                                <td class="py-4 px-6 text-white font-bold text-right">Từ 500.000đ/tháng</td>
+                            </tr>
+                            <tr class="hover:bg-slate-700/30 transition-colors">
+                                <td class="py-4 px-6 text-slate-300">Báo cáo tài chính, quyết toán thuế cuối năm</td>
+                                <td class="py-4 px-6 text-white font-bold text-right">Từ 500.000đ/tháng</td>
+                            </tr>
+                            <tr class="hover:bg-slate-700/30 transition-colors">
+                                <td class="py-4 px-6 text-slate-300">Dịch vụ khai thuế ban đầu</td>
+                                <td class="py-4 px-6 text-white font-bold text-right">500.000đ</td>
+                            </tr>
+                            <tr class="hover:bg-slate-700/30 transition-colors">
+                                <td class="py-4 px-6 text-slate-300">Dịch vụ kế toán nội bộ / kế toán hộ kinh doanh</td>
+                                <td class="py-4 px-6 text-white font-bold text-right">Báo giá theo hồ sơ</td>
+                            </tr>
+                            <tr class="hover:bg-slate-700/30 transition-colors">
+                                <td class="py-4 px-6 text-slate-300">Làm sổ sách kế toán, hoàn thuế GTGT, TNCN</td>
+                                <td class="py-4 px-6 text-white font-bold text-right">Báo giá theo hồ sơ</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Group 3: Thay đổi GPKD -->
+            <div class="mb-20" id="thay-doi">
+                <div class="flex items-center gap-4 mb-8">
+                    <div class="w-12 h-12 rounded-xl bg-slate-800 text-brand-accent flex items-center justify-center text-xl">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </div>
+                    <h3 class="font-heading text-2xl font-bold text-white">Thay Đổi GPKD (Đồng giá)</h3>
+                    <div class="flex-1 h-px bg-slate-800 ml-4"></div>
+                </div>
+
+                <div class="glass rounded-2xl border border-slate-700 overflow-hidden">
+                    <div class="grid md:grid-cols-2 lg:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-slate-700">
+                        <div class="p-6 text-center hover:bg-slate-800/50 transition-colors cursor-pointer group">
+                            <i class="fa-solid fa-signature text-2xl text-slate-500 mb-3 group-hover:text-brand-accent transition-colors"></i>
+                            <h4 class="font-bold text-white group-hover:text-brand-accent transition-colors">Đổi tên công ty</h4>
+                            <p class="text-sm text-slate-400 mt-1">Phí: 500.000đ</p>
+                        </div>
+                        <div class="p-6 text-center hover:bg-slate-800/50 transition-colors cursor-pointer group">
+                            <i class="fa-solid fa-location-dot text-2xl text-slate-500 mb-3 group-hover:text-brand-accent transition-colors"></i>
+                            <h4 class="font-bold text-white group-hover:text-brand-accent transition-colors">Đổi địa chỉ</h4>
+                            <p class="text-sm text-slate-400 mt-1">Phí: 500.000đ</p>
+                        </div>
+                        <div class="p-6 text-center hover:bg-slate-800/50 transition-colors cursor-pointer group">
+                            <i class="fa-solid fa-chart-pie text-2xl text-slate-500 mb-3 group-hover:text-brand-accent transition-colors"></i>
+                            <h4 class="font-bold text-white group-hover:text-brand-accent transition-colors">Tăng vốn điều lệ</h4>
+                            <p class="text-sm text-slate-400 mt-1">Phí: 500.000đ</p>
+                        </div>
+                        <div class="p-6 text-center hover:bg-slate-800/50 transition-colors cursor-pointer group">
+                            <i class="fa-solid fa-id-card text-2xl text-slate-500 mb-3 group-hover:text-brand-accent transition-colors"></i>
+                            <h4 class="font-bold text-white group-hover:text-brand-accent transition-colors">Đổi đại diện PL</h4>
+                            <p class="text-sm text-slate-400 mt-1">Phí: 500.000đ</p>
+                        </div>
+                    </div>
+                    <div class="bg-slate-800/80 p-4 text-center border-t border-slate-700">
+                        <p class="text-sm text-slate-300">
+                            Các dịch vụ thay đổi khác (Thêm ngành nghề, thay đổi cổ đông, cập nhật CCCD...) đồng mức phí: 
+                            <span class="font-bold text-brand-accent ml-1 text-lg">500.000đ</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Group 4: Dịch vụ khác -->
+            <div id="dich-vu-khac">
+                <div class="flex items-center gap-4 mb-8">
+                    <div class="w-12 h-12 rounded-xl bg-slate-800 text-brand-accent flex items-center justify-center text-xl">
+                        <i class="fa-solid fa-briefcase"></i>
+                    </div>
+                    <h3 class="font-heading text-2xl font-bold text-white">Dịch Vụ Khác</h3>
+                    <div class="flex-1 h-px bg-slate-800 ml-4"></div>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+                    <a href="#lien-he" class="glass p-4 rounded-xl border border-slate-700 hover:border-brand-accent text-center group cursor-pointer transition-colors">
+                        <i class="fa-solid fa-receipt text-2xl text-slate-400 group-hover:text-brand-accent mb-2"></i>
+                        <h4 class="text-sm font-medium text-slate-300 group-hover:text-white">Hóa đơn điện tử</h4>
+                    </a>
+                    <a href="#lien-he" class="glass p-4 rounded-xl border border-slate-700 hover:border-brand-accent text-center group cursor-pointer transition-colors">
+                        <i class="fa-solid fa-shield-heart text-2xl text-slate-400 group-hover:text-brand-accent mb-2"></i>
+                        <h4 class="text-sm font-medium text-slate-300 group-hover:text-white">Bảo hiểm xã hội</h4>
+                    </a>
+                    <a href="#lien-he" class="glass p-4 rounded-xl border border-slate-700 hover:border-brand-accent text-center group cursor-pointer transition-colors">
+                        <i class="fa-solid fa-ban text-2xl text-slate-400 group-hover:text-brand-accent mb-2"></i>
+                        <h4 class="text-sm font-medium text-slate-300 group-hover:text-white">Giải thể / Tạm ngừng</h4>
+                    </a>
+                    <a href="#lien-he" class="glass p-4 rounded-xl border border-slate-700 hover:border-brand-accent text-center group cursor-pointer transition-colors">
+                        <i class="fa-solid fa-copyright text-2xl text-slate-400 group-hover:text-brand-accent mb-2"></i>
+                        <h4 class="text-sm font-medium text-slate-300 group-hover:text-white">Đăng ký nhãn hiệu</h4>
+                    </a>
+                    <a href="#lien-he" class="glass p-4 rounded-xl border border-slate-700 hover:border-brand-accent text-center group cursor-pointer transition-colors">
+                        <i class="fa-solid fa-signature text-2xl text-slate-400 group-hover:text-brand-accent mb-2"></i>
+                        <h4 class="text-sm font-medium text-slate-300 group-hover:text-white">Chữ ký số</h4>
+                    </a>
+                    <a href="#lien-he" class="glass p-4 rounded-xl border border-slate-700 hover:border-brand-accent text-center group cursor-pointer transition-colors">
+                        <i class="fa-solid fa-id-badge text-2xl text-slate-400 group-hover:text-brand-accent mb-2"></i>
+                        <h4 class="text-sm font-medium text-slate-300 group-hover:text-white">Đăng ký MST</h4>
+                    </a>
+                    <a href="#lien-he" class="glass p-4 rounded-xl border border-slate-700 hover:border-brand-accent text-center group cursor-pointer transition-colors">
+                        <i class="fa-solid fa-file-contract text-2xl text-slate-400 group-hover:text-brand-accent mb-2"></i>
+                        <h4 class="text-sm font-medium text-slate-300 group-hover:text-white">Soạn hợp đồng</h4>
+                    </a>
+                </div>
+
+                <!-- Accordion Bảng Giá Chi Tiết -->
+                <div class="mt-8 text-center">
+                    <button onclick="togglePricing('pricing-thay-doi')" class="inline-flex items-center gap-2 text-brand-accent hover:text-brand-accentHover font-medium transition-colors cursor-pointer">
+                        <span>Xem bảng giá chi tiết tất cả dịch vụ</span>
+                        <i class="fa-solid fa-chevron-down transition-transform duration-300" id="icon-thay-doi"></i>
+                    </button>
+                </div>
+                <div id="pricing-thay-doi" class="hidden mt-6 bg-slate-800/40 rounded-2xl border border-slate-700 overflow-x-auto">
+                    <table class="w-full text-left border-collapse min-w-[600px]">
+                        <thead>
+                            <tr class="bg-slate-800">
+                                <th class="py-4 px-6 text-white font-bold border-b border-slate-700">Dịch vụ thay đổi GPKD & Các dịch vụ khác</th>
+                                <th class="py-4 px-6 text-white font-bold border-b border-slate-700 text-right">Phí dịch vụ</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-700/50">
+                            <tr class="hover:bg-slate-700/30 transition-colors">
+                                <td class="py-4 px-6 text-slate-300">Đổi tên / Đổi địa chỉ công ty</td>
+                                <td class="py-4 px-6 text-white font-bold text-right">500.000đ</td>
+                            </tr>
+                            <tr class="hover:bg-slate-700/30 transition-colors">
+                                <td class="py-4 px-6 text-slate-300">Thêm, bớt ngành nghề kinh doanh</td>
+                                <td class="py-4 px-6 text-white font-bold text-right">500.000đ</td>
+                            </tr>
+                            <tr class="hover:bg-slate-700/30 transition-colors">
+                                <td class="py-4 px-6 text-slate-300">Tăng, giảm vốn điều lệ / Thêm, giảm cổ đông</td>
+                                <td class="py-4 px-6 text-white font-bold text-right">500.000đ</td>
+                            </tr>
+                            <tr class="hover:bg-slate-700/30 transition-colors">
+                                <td class="py-4 px-6 text-slate-300">Đổi người đại diện pháp luật / Đổi loại hình công ty</td>
+                                <td class="py-4 px-6 text-white font-bold text-right">500.000đ</td>
+                            </tr>
+                            <tr class="hover:bg-slate-700/30 transition-colors">
+                                <td class="py-4 px-6 text-slate-300">Cập nhật CCCD trên giấy phép</td>
+                                <td class="py-4 px-6 text-white font-bold text-right">500.000đ</td>
+                            </tr>
+                            <tr class="bg-slate-800/80">
+                                <td colspan="2" class="py-3 px-6 text-brand-accent font-bold text-sm uppercase">DỊCH VỤ KHÁC</td>
+                            </tr>
+                            <tr class="hover:bg-slate-700/30 transition-colors">
+                                <td class="py-4 px-6 text-slate-300">Thủ tục giải thể công ty, doanh nghiệp</td>
+                                <td class="py-4 px-6 text-white font-bold text-right">1.500.000đ</td>
+                            </tr>
+                            <tr class="hover:bg-slate-700/30 transition-colors">
+                                <td class="py-4 px-6 text-slate-300">Tạm ngừng kinh doanh</td>
+                                <td class="py-4 px-6 text-white font-bold text-right">Liên hệ báo giá</td>
+                            </tr>
+                            <tr class="hover:bg-slate-700/30 transition-colors">
+                                <td class="py-4 px-6 text-slate-300">Hóa đơn điện tử, Chữ ký số, Bảo hiểm xã hội, Đăng ký nhãn hiệu</td>
+                                <td class="py-4 px-6 text-white font-bold text-right">Liên hệ báo giá</td>
+                            </tr>
+                            <tr class="hover:bg-slate-700/30 transition-colors">
+                                <td class="py-4 px-6 text-slate-300">Đăng ký MST cá nhân, Soạn thảo hợp đồng</td>
+                                <td class="py-4 px-6 text-white font-bold text-right">Liên hệ báo giá</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Group 5: Đào tạo Kế toán -->
+            <div class="mt-20" id="dao-tao">
+                <div class="flex items-center gap-4 mb-8">
+                    <div class="w-12 h-12 rounded-xl bg-slate-800 text-brand-accent flex items-center justify-center text-xl">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="font-heading text-2xl font-bold text-white">Đào Tạo Kế Toán Thực Chiến</h3>
+                    <div class="flex-1 h-px bg-slate-800 ml-4"></div>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-6">
+                    <!-- Course 1 -->
+                    <div class="glass p-6 rounded-2xl border border-slate-700 card-hover flex flex-col group relative overflow-hidden cursor-pointer">
+                        <div class="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity text-brand-accent">
+                            <i class="fa-solid fa-arrow-right -rotate-45 text-xl"></i>
+                        </div>
+                        <div class="w-10 h-10 rounded-lg bg-slate-800 flex items-center justify-center text-brand-accent mb-4">
+                            <i class="fa-solid fa-calculator"></i>
+                        </div>
+                        <h4 class="font-bold text-xl text-white mb-2 group-hover:text-brand-accent transition-colors">Kế Toán Tổng Hợp</h4>
+                        <p class="text-sm text-slate-400 mb-6 flex-1">Nắm vững nghiệp vụ từ cơ bản đến chuyên sâu, tự tin làm báo cáo, xử lý chứng từ thực tế.</p>
+                        
+                        <div class="mt-auto pt-4 border-t border-slate-800 flex justify-between items-end">
+                            <div>
+                                <div class="text-xs text-slate-500 mb-1">Học phí</div>
+                                <div class="flex items-baseline gap-1">
+                                    <span class="font-heading text-xl font-extrabold text-brand-accent">Liên hệ tư vấn</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Course 2 -->
+                    <div class="glass p-6 rounded-2xl border border-slate-700 card-hover flex flex-col group relative overflow-hidden cursor-pointer">
+                        <div class="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity text-brand-accent">
+                            <i class="fa-solid fa-arrow-right -rotate-45 text-xl"></i>
+                        </div>
+                        <div class="w-10 h-10 rounded-lg bg-slate-800 flex items-center justify-center text-brand-accent mb-4">
+                            <i class="fa-solid fa-file-invoice-dollar"></i>
+                        </div>
+                        <h4 class="font-bold text-xl text-white mb-2 group-hover:text-brand-accent transition-colors">Kế Toán Thuế</h4>
+                        <p class="text-sm text-slate-400 mb-6 flex-1">Thực hành kê khai thuế, quyết toán thuế cuối năm, lập BCTC đúng chuẩn pháp luật hiện hành.</p>
+                        
+                        <div class="mt-auto pt-4 border-t border-slate-800 flex justify-between items-end">
+                            <div>
+                                <div class="text-xs text-slate-500 mb-1">Học phí</div>
+                                <div class="flex items-baseline gap-1">
+                                    <span class="font-heading text-xl font-extrabold text-brand-accent">Liên hệ tư vấn</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Course 3 -->
+                    <div class="glass p-6 rounded-2xl border border-slate-700 card-hover flex flex-col group relative overflow-hidden cursor-pointer">
+                        <div class="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity text-brand-accent">
+                            <i class="fa-solid fa-arrow-right -rotate-45 text-xl"></i>
+                        </div>
+                        <div class="w-10 h-10 rounded-lg bg-slate-800 flex items-center justify-center text-brand-accent mb-4">
+                            <i class="fa-solid fa-book"></i>
+                        </div>
+                        <h4 class="font-bold text-xl text-white mb-2 group-hover:text-brand-accent transition-colors">Sổ Sách Kế Toán (Misa)</h4>
+                        <p class="text-sm text-slate-400 mb-6 flex-1">Thành thạo phần mềm MISA, làm sổ sách kế toán chuyên nghiệp, tiết kiệm thời gian.</p>
+                        
+                        <div class="mt-auto pt-4 border-t border-slate-800 flex justify-between items-end">
+                            <div>
+                                <div class="text-xs text-slate-500 mb-1">Học phí</div>
+                                <div class="flex items-baseline gap-1">
+                                    <span class="font-heading text-xl font-extrabold text-brand-accent">Liên hệ tư vấn</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- WHY CHOOSE US & TESTIMONIALS SECTION -->
+    <section class="py-20 relative bg-slate-900 overflow-hidden">
+        <!-- Decoration -->
+        <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-slate-700 to-transparent"></div>
+        <div class="absolute -left-40 top-40 w-[500px] h-[500px] bg-brand-accent/5 blur-[100px] rounded-full pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-6 md:px-8 lg:px-12 relative z-10">
+            
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                
+                <!-- Content Left -->
+                <div>
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border-slate-700 text-slate-300 text-sm font-medium mb-6">
+                        <i class="fa-solid fa-star text-yellow-500"></i>
+                        Về Trangketoan
+                    </div>
+                    
+                    <h2 class="font-heading text-3xl md:text-4xl font-bold mb-6">
+                        An Tâm Kinh Doanh, <br>
+                        <span class="text-brand-accent">Pháp Lý & Thuế Để Chúng Tôi Lo</span>
+                    </h2>
+                    
+                    <p class="text-slate-400 text-lg mb-10">
+                        Chúng tôi tự hào là đơn vị cung cấp giải pháp kế toán và pháp lý minh bạch, tối ưu chi phí, giúp doanh nghiệp bạn vận hành trơn tru mà không lo rủi ro về thuế.
+                    </p>
+
+                    <div class="space-y-6">
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-brand-accent/10 border border-brand-accent/20 text-brand-accent flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-file-shield text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg text-white mb-1">Chịu trách nhiệm 100%</h4>
+                                <p class="text-slate-400 text-sm leading-relaxed">Thay mặt doanh nghiệp giải trình trực tiếp với cơ quan thuế khi có thanh tra, kiểm tra.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-brand-accent/10 border border-brand-accent/20 text-brand-accent flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-piggy-bank text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg text-white mb-1">Chi phí minh bạch, trọn gói</h4>
+                                <p class="text-slate-400 text-sm leading-relaxed">Cam kết chỉ thu phí theo đúng hợp đồng ban đầu, tuyệt đối không phát sinh chi phí ẩn.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-brand-accent/10 border border-brand-accent/20 text-brand-accent flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-stopwatch text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg text-white mb-1">Nhanh chóng & Đúng hẹn</h4>
+                                <p class="text-slate-400 text-sm leading-relaxed">Hồ sơ pháp lý được xử lý và bàn giao nhanh gọn từ 1-3 ngày làm việc.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonials Grid Right -->
+                <div class="relative">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent z-10 pointer-events-none h-full"></div>
+                    
+                    <div class="grid gap-6">
+                        <!-- Testimonial 1 -->
+                        <div class="glass p-6 rounded-2xl border border-slate-700 transform translate-x-4 hover:translate-x-0 transition-transform">
+                            <div class="flex items-center gap-1 text-yellow-500 mb-3 text-sm">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="text-slate-300 italic mb-4 text-sm leading-relaxed">"Dịch vụ kế toán trọn gói rất chuyên nghiệp. Tôi không còn phải đau đầu vì mớ hóa đơn chứng từ mỗi tháng nữa. Đội ngũ hỗ trợ nhiệt tình, giải đáp nhanh gọn qua Zalo."</p>
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center font-bold text-slate-300">T</div>
+                                <div>
+                                    <div class="font-bold text-sm text-white">Anh Tuấn</div>
+                                    <div class="text-xs text-slate-500">Giám đốc Cty TNHH TM DV...</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Testimonial 2 -->
+                        <div class="glass p-6 rounded-2xl border border-slate-700 transform -translate-x-4 hover:translate-x-0 transition-transform bg-slate-800/80">
+                            <div class="flex items-center gap-1 text-yellow-500 mb-3 text-sm">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="text-slate-300 italic mb-4 text-sm leading-relaxed">"Thành lập công ty nhanh hơn tôi tưởng tượng. Trangketoan lo trọn gói từ GPKD, con dấu đến chữ ký số. Cực kỳ tiện lợi cho người mới khởi nghiệp như tôi."</p>
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center font-bold text-slate-300">M</div>
+                                <div>
+                                    <div class="font-bold text-sm text-white">Chị Mai</div>
+                                    <div class="text-xs text-slate-500">Founder Startup Công Nghệ</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FINAL CTA SECTION -->
+    <section class="py-24 relative overflow-hidden">
+        <!-- Glow background -->
+        <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <div class="w-full max-w-3xl h-[300px] bg-brand-accent/15 blur-[120px] rounded-full"></div>
+        </div>
+
+        <div class="max-w-4xl mx-auto px-6 relative z-10 text-center">
+            <h2 class="font-heading text-4xl md:text-5xl font-extrabold mb-6 text-white">
+                Sẵn Sàng Tối Ưu Hệ Thống <br>Kế Toán Doanh Nghiệp?
+            </h2>
+            <p class="text-slate-400 text-lg md:text-xl mb-10 max-w-2xl mx-auto">
+                Liên hệ ngay hôm nay để nhận tư vấn miễn phí từ chuyên gia kế toán trưởng của chúng tôi.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                <a href="https://zalo.me/0777868678" target="_blank" class="bg-brand-accent hover:bg-brand-accentHover text-white px-10 py-5 rounded-2xl font-bold transition-all duration-300 flex items-center justify-center gap-3 shadow-[0_0_30px_rgba(250,85,20,0.5)] transform hover:scale-105 animate-pulse-slow text-lg sm:w-auto w-full">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg" alt="Zalo" class="w-6 h-6 filter brightness-0 invert">
+                    Chat Zalo: 0777 868 678
+                </a>
+                <a href="tel:0777868678" class="glass text-white px-10 py-5 rounded-2xl font-bold transition-all duration-300 flex items-center justify-center gap-3 hover:bg-slate-800 border border-slate-700 text-lg sm:w-auto w-full">
+                    <i class="fa-solid fa-phone text-brand-accent"></i>
+                    Gọi Trực Tiếp
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-[#0b1120] pt-16 pb-24 md:pb-8 border-t border-slate-800 relative z-20">
+        <div class="max-w-7xl mx-auto px-6 md:px-8 lg:px-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+                
+                <!-- Col 1 -->
+                <div class="lg:col-span-2">
+                    <a href="#" class="flex items-center gap-2 mb-6">
+                        <div class="w-8 h-8 bg-brand-accent rounded-lg flex items-center justify-center">
+                            <i class="fa-solid fa-calculator text-white text-sm"></i>
+                        </div>
+                        <span class="font-heading font-bold text-xl tracking-tight text-white">Trang<span class="text-brand-accent">ketoan</span></span>
+                    </a>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6 max-w-md">
+                        Đơn vị cung cấp dịch vụ thành lập doanh nghiệp, kế toán thuế, thay đổi giấy phép kinh doanh uy tín, nhanh chóng và bảo mật.
+                    </p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:text-brand-accent hover:bg-brand-accent/10 transition-colors cursor-pointer">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </div>
+                        <div class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:text-brand-accent hover:bg-brand-accent/10 transition-colors cursor-pointer">
+                            <i class="fa-brands fa-youtube"></i>
+                        </div>
+                        <div class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:text-brand-accent hover:bg-brand-accent/10 transition-colors cursor-pointer">
+                            <i class="fa-brands fa-tiktok"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Col 2 -->
+                <div>
+                    <h4 class="font-bold text-white mb-6 text-lg">Dịch Vụ</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="#thanh-lap" class="text-slate-400 hover:text-brand-accent transition-colors">Thành lập công ty TNHH</a></li>
+                        <li><a href="#thanh-lap" class="text-slate-400 hover:text-brand-accent transition-colors">Thành lập công ty Cổ phần</a></li>
+                        <li><a href="#ke-toan" class="text-slate-400 hover:text-brand-accent transition-colors">Dịch vụ Kế toán trọn gói</a></li>
+                        <li><a href="#ke-toan" class="text-slate-400 hover:text-brand-accent transition-colors">Báo cáo tài chính</a></li>
+                        <li><a href="#thay-doi" class="text-slate-400 hover:text-brand-accent transition-colors">Thay đổi Giấy phép KD</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3 -->
+                <div>
+                    <h4 class="font-bold text-white mb-6 text-lg">Liên Hệ</h4>
+                    <ul class="space-y-4 text-sm">
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-phone text-brand-accent mt-1"></i>
+                            <div>
+                                <div class="text-slate-400 text-xs mb-1">Hotline tư vấn</div>
+                                <a href="tel:0777868678" class="font-bold text-white hover:text-brand-accent transition-colors">0777 868 678</a>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-comment-dots text-brand-accent mt-1"></i>
+                            <div>
+                                <div class="text-slate-400 text-xs mb-1">Hỗ trợ qua Zalo</div>
+                                <a href="https://zalo.me/0777868678" target="_blank" class="font-bold text-white hover:text-brand-accent transition-colors">Zalo: 0777 868 678</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="pt-8 border-t border-slate-800 text-center flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-slate-500 text-sm">© 2026 Trangketoan. Đã đăng ký bản quyền.</p>
+                <div class="flex gap-4 text-sm">
+                    <a href="#" class="text-slate-500 hover:text-white transition-colors">Chính sách bảo mật</a>
+                    <a href="#" class="text-slate-500 hover:text-white transition-colors">Điều khoản dịch vụ</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- STICKY MOBILE ACTION BAR (Only visible on mobile/tablet) -->
+    <div class="md:hidden fixed bottom-0 left-0 right-0 glass border-t border-slate-700 p-3 z-50 flex gap-3 shadow-[0_-10px_20px_rgba(0,0,0,0.3)] backdrop-blur-xl bg-slate-900/80">
+        <a href="tel:0777868678" class="flex-1 bg-slate-800 text-white rounded-xl py-3 flex items-center justify-center gap-2 font-bold border border-slate-700 hover:bg-slate-700 active:scale-95 transition-all text-sm">
+            <i class="fa-solid fa-phone text-brand-accent"></i>
+            Gọi Ngay
+        </a>
+        <a href="https://zalo.me/0777868678" target="_blank" class="flex-1 bg-brand-accent text-white rounded-xl py-3 flex items-center justify-center gap-2 font-bold shadow-lg shadow-brand-accent/30 active:scale-95 transition-all text-sm">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg" alt="Zalo" class="w-5 h-5 filter brightness-0 invert">
+            Chat Zalo
+        </a>
+    </div>
+
+    <!-- JS for interactions -->
+    <script>
+        // Accordion functionality for pricing tables
+        function togglePricing(id) {
+            const el = document.getElementById(id);
+            const iconId = 'icon-' + id.replace('pricing-', '');
+            const icon = document.getElementById(iconId);
+            
+            if (el.classList.contains('hidden')) {
+                el.classList.remove('hidden');
+                icon.classList.add('rotate-180');
+            } else {
+                el.classList.add('hidden');
+                icon.classList.remove('rotate-180');
+            }
+        }
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('py-2');
+                nav.classList.remove('py-4');
+            } else {
+                nav.classList.add('py-4');
+                nav.classList.remove('py-2');
+            }
+        });
+    </script>
+</body>
+</html>
